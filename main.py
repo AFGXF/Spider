@@ -6,6 +6,10 @@ open_closed_processable = ["issues", "pulls"]
 owner = str(input("Owner:"))
 repo = str(input("RepoName:"))
 action = str(input("Action:"))
+pre_release = False
+if action == "releases-pre":
+    pre_release = True
+    action = "releases"
 # Send a GET request.
 req = requests.get("https://api.github.com/repos/" + owner + "/" + repo + "/" + action)
 # Exit with status 1 when Request error.
@@ -35,9 +39,11 @@ if action in open_closed_processable:
     elif action == "pulls":
         print(events, "pull request(s),", events_open, "open,", events_closed, "closed")
 elif action == "releases":
-    # TODO: Add process of Release
-    #   To be continued Next Year ! :D
-    pass
+    for i in obj:
+        if i["prerelease"] and pre_release:
+            print(i["name"] + ":" + i["tag_name"] + "\t[PRE]")
+        else:
+            print(i["name"] + ":" + i["tag_name"])
 
 else:
     print("ERROR:Unknown Action Type")
