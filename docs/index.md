@@ -1,4 +1,5 @@
-# Spider
+# `Spider` Docs
+
 `Spider` is a Web-Spider written in Python.
 
 # Requirements
@@ -9,4 +10,4 @@
 pip install request
 ```
 
-[Docs](docs/index.md)
+- [Usage](usage.md)
