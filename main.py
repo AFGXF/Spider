@@ -26,7 +26,7 @@ if action in open_closed_processable:
     for i in obj:
         # Base information.
         print("#" + str(i["number"]) + ":" + i["title"], end='')
-        # Count status.
+        # Count status and print states.
         if i["state"] == "open":
             events_open = events_open + 1
             print("\t[OPEN]")
@@ -41,10 +41,15 @@ if action in open_closed_processable:
 elif action == "releases":
     for i in obj:
         if i["prerelease"] and pre_release:
+            # Print if is pre-release.
             print(i["name"] + ":" + i["tag_name"] + "\t[PRE]")
         else:
             print(i["name"] + ":" + i["tag_name"])
 
+elif action == "tags":
+    for i in obj:
+        # Print with SHA.
+        print(i["name"] + "\t(" + i["commit"]["sha"] + ")")
 else:
     print("ERROR:Unknown Action Type")
     exit(1)
